@@ -1,48 +1,48 @@
 # QuizBattle 🎯
 
-**QuizBattle** ist eine desktopbasierte Quiz-Anwendung für zwei Teams, entwickelt mit **Java 21**, **JavaFX** und **Gradle**. Zwei Teams treten in mehreren Fragerunden gegeneinander an und sammeln Punkte, indem sie sich zuerst mit dem Buzzer melden und Fragen beantworten.
+**QuizBattle** is a desktop quiz game for two teams, built with **Java 21**, **JavaFX**, and **Gradle**. Teams compete across multiple questions, use buzzers to answer first, and earn points for correct answers.
 
-> Studienprojekt im Bereich Software Engineering mit eigener Quiz-Oberfläche, Spiellogik und automatisierten Tests.
+> Developed collaboratively as part of a software engineering university project at Hochschule Heilbronn.
 
-## Funktionen
+## Features
 
-- **Zwei Teams:** Teamnamen festlegen, Punkte vergleichen und am Ende einen Sieger anzeigen.
-- **Buzzer:** Über Schaltflächen oder die Tastatur melden sich die Teams für eine Antwort.
-- **Fragenkategorien:** Geografie, Naturwissenschaften, Mathematik, Programmierung und Datenbanken.
-- **Themenpakete:** Beispielsweise Hauptstädte, Physik, Algebra, Java, Python oder SQL.
-- **Fragemodi:** Multiple Choice und freie Texteingabe.
-- **Spielkonfiguration:** Anzahl der Fragen (1–20) und Zufallsmodus auswählen.
-- **Zeitlimits:** Buzzer- und Antwortphasen mit Countdown.
-- **Neustart:** Nach dem Spiel eine neue Runde starten.
+- **Two-team competition:** Enter team names, track scores, and display the winner at the end.
+- **Buzzer system:** Players can buzz in using on-screen buttons or keyboard shortcuts.
+- **Question categories:** Geography, science, mathematics, programming, and databases.
+- **Topics:** Examples include capitals, physics, algebra, Java, Python, and SQL.
+- **Question types:** Multiple-choice questions and free-text answers.
+- **Game configuration:** Choose between 1 and 20 questions and enable random mode.
+- **Timers:** Countdown timers for buzzing in and answering.
+- **Play again:** Start a new game after a match finishes.
 
-Die Fragen sind aktuell **als Beispieldaten im Quellcode** hinterlegt und werden beim Start geladen. Eine externe Datenbank oder Internetverbindung ist nicht erforderlich.
+Questions are currently provided as **sample data in the source code** and loaded when the game starts. No external database or internet connection is required to play.
 
-## Technologien
+## Technologies
 
-| Bereich | Technologie |
-|---|---|
-| Sprache | Java 21 |
-| Benutzeroberfläche | JavaFX 21, FXML, CSS |
-| Build-Tool | Gradle (Wrapper enthalten) |
-| Architektur | Modulare Aufteilung in API, Spiellogik und Benutzeroberfläche; Java-Module (JPMS) |
-| Tests | JUnit 5 |
+| Area | Technology |
+| --- | --- |
+| Programming language | Java 21 |
+| User interface | JavaFX 21, FXML, CSS |
+| Build tool | Gradle (Wrapper included) |
+| Architecture | Separate API, game-logic, and UI modules; Java Platform Module System (JPMS) |
+| Testing | JUnit 5 |
 | Logging | SLF4J |
 
-## Voraussetzungen
+## Requirements
 
 - **JDK 21**
-- **IntelliJ IDEA** (empfohlen) oder eine andere Java-IDE
-- Internetzugang für die **erste** Gradle-Synchronisierung (zum Laden von Abhängigkeiten)
+- **IntelliJ IDEA** (recommended) or another Java IDE
+- Internet access for the **first Gradle synchronization** to download dependencies
 
-JavaFX muss nicht manuell installiert werden; das Gradle-Plugin verwaltet die benötigten Bibliotheken.
+JavaFX does not need to be installed separately; the Gradle configuration manages the required dependencies.
 
-## Projekt in IntelliJ IDEA starten
+## Run in IntelliJ IDEA
 
-1. Repository herunterladen oder klonen und den Ordner **`QuizBattle`** in IntelliJ über **File → Open** öffnen.
-2. Unter **File → Project Structure → Project** das **JDK 21** auswählen.
-3. Unter **Settings → Build, Execution, Deployment → Build Tools → Gradle** bei **Gradle JVM** ebenfalls JDK 21 auswählen.
-4. Das Gradle-Projekt synchronisieren (**Reload All Gradle Projects**).
-5. Das integrierte Terminal öffnen und den passenden Startbefehl ausführen:
+1. Clone or download the repository and open the **`QuizBattle`** folder using **File → Open**.
+2. Select **JDK 21** under **File → Project Structure → Project**.
+3. Select JDK 21 for **Gradle JVM** under **Settings → Build, Execution, Deployment → Build Tools → Gradle**.
+4. Reload the Gradle project using **Reload All Gradle Projects**.
+5. Open the integrated terminal and run the appropriate command.
 
 **Windows (PowerShell):**
 
@@ -56,40 +56,42 @@ JavaFX muss nicht manuell installiert werden; das Gradle-Plugin verwaltet die be
 ./gradlew :javafx:run
 ```
 
-Alternativ die Klasse `javafx/src/main/java/de/hhn/it/devtools/javafx/Main.java` über IntelliJ starten, wenn die Gradle-/JavaFX-Konfiguration übernommen wurde.
+Alternatively, run `javafx/src/main/java/de/hhn/it/devtools/javafx/Main.java` from IntelliJ once the project and JavaFX dependencies have been configured.
 
-Der Startpunkt lädt **direkt QuizBattle** – ohne Auswahlmenü und ohne andere Beispielanwendungen.
+The application starts **QuizBattle directly**, without a menu for other sample applications.
 
-## QuizBattle bedienen
+## How to Play
 
-1. Die Namen für **Team 1** und **Team 2** eingeben.
-2. Kategorie und gegebenenfalls Themenpaket auswählen, oder den **Zufallsmodus** aktivieren.
-3. Anzahl der Fragen einstellen und **Start game** anklicken.
-4. Bei einer Frage meldet sich ein Team über den Buzzer:
+1. Enter names for **Team 1** and **Team 2**.
+2. Select a category and, if applicable, a topic, or enable **random mode**.
+3. Choose the number of questions and click **Start game**.
+4. Buzz in using the keyboard:
    - **Q:** Team 1
    - **P:** Team 2
-5. Bei Multiple-Choice-Fragen mit einer Schaltfläche oder mit **1–4** bzw. **A–D** antworten. Bei Textfragen die Antwort eintippen und absenden.
-6. Nach Ende des Spiels den Punktestand ansehen und bei Bedarf **NEW GAME** wählen.
+5. For multiple-choice questions, use a button or press **1–4** or **A–D**. For free-text questions, type and submit an answer.
+6. Review the final score and choose **NEW GAME** to play again.
 
-## Projektstruktur
+## Project Structure
 
 ```text
 QuizBattle/
-├── apis/            # Datenmodelle, Enums, Service-Schnittstellen und Exceptions
-├── components/      # QuizGameService, Spielzustände, Antwortprüfung, Fragen
-│   └── src/test/    # JUnit-Tests für die Spiellogik
-├── javafx/          # JavaFX-Oberfläche (FXML, Controller, ViewModel, CSS, Bilder)
+├── apis/            # Data models, enums, service interfaces, and exceptions
+├── components/      # Quiz game logic, states, answer validation, and questions
+│   └── src/test/    # JUnit tests for the game logic
+├── javafx/          # JavaFX UI (FXML, controllers, ViewModel, CSS, images)
 ├── gradle/wrapper/  # Gradle Wrapper
-├── gradlew           # Startskript für Linux/macOS
-├── gradlew.bat       # Startskript für Windows
+├── gradlew          # Linux/macOS wrapper script
+├── gradlew.bat      # Windows wrapper script
 └── README.md
 ```
 
-Die Fragen und Kategorien werden in `components/src/main/java/de/hhn/it/devtools/components/quizapp/service/generator/QuizDataGenerator.java` erstellt.
+Questions and categories are defined in:
 
-## Tests ausführen
+`components/src/main/java/de/hhn/it/devtools/components/quizapp/service/generator/QuizDataGenerator.java`
 
-**Windows:**
+## Run Tests
+
+**Windows (PowerShell):**
 
 ```powershell
 .\gradlew.bat test
@@ -100,11 +102,6 @@ Die Fragen und Kategorien werden in `components/src/main/java/de/hhn/it/devtools
 ```bash
 ./gradlew test
 ```
-
-## Hinweise
-
-- Die Anwendung ist ein **lokales Zwei-Team-Spiel**, kein Online-Mehrspielerspiel.
-
 
 ## SCreenshots 
 
@@ -117,3 +114,11 @@ Die Fragen und Kategorien werden in `components/src/main/java/de/hhn/it/devtools
 - Gameplay screen
 
 ![alt text](image-1.png)
+
+
+
+
+## Project Notes
+
+- QuizBattle is a **local two-team game**, not an online multiplayer application.
+- The project was developed as a **university team project**. Its features and code are the result of collaborative work.
