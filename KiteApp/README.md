@@ -105,7 +105,8 @@ Add screenshots from the running application, for example:
 
 2. Home screen
 
-![alt text](image-2.png)
+<img width="1276" height="1301" alt="image" src="https://github.com/user-attachments/assets/bb5fc4fa-df8b-42e5-a10e-291c62e47285" />
+
 
 
 
