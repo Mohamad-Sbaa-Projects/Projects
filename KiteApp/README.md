@@ -97,7 +97,8 @@ Add screenshots from the running application, for example:
 
 1. Intro screen
 
-![alt text](image-1.png)
+<img width="1273" height="1302" alt="image" src="https://github.com/user-attachments/assets/1a042a42-c8b1-48b0-bfd0-2af5a9e2f4bc" />
+
 
 
 
