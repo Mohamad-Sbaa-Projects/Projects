@@ -1,0 +1,2 @@
+rootProject.name = 'QuizBattle'
+include ':apis', ':components', ':javafx'

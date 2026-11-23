@@ -1,0 +1,19 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+javafx {
+    version = '21.0.1'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+    implementation project(':apis')
+    implementation project(':components')
+}
+
+application {
+    mainModule = 'devtools.javafx'
+    mainClass = 'de.hhn.it.devtools.javafx.Main'
+}
