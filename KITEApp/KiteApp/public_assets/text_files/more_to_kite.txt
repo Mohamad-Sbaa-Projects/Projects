@@ -1,0 +1,38 @@
+## KITE - kurz erklärt
+
+## Was ist KITE?
+
+KITE ist eine gamifizierte Web-App. Du erlebst typische Situationen im Gründungsprozess - z. B. Bankgespräch oder Raumanmietung - und trainierst Reflexion, Handlungskompetenz und Resilienz im Umgang mit Bias.
+
+## Für wen ist KITE gedacht?
+
+KITE richtet sich an Gründerinnen, an Menschen, die mit Gründerinnen arbeiten - z. B. Investor*innen, Berater*innen, Journalist*innen, Vermietende - sowie an Interessierte, die durch Perspektivenübernahme lernen möchten.
+
+## Wozu dient KITE?
+
+Die App hilft dir, Diskriminierung in Gründungssituationen zu erkennen, souverän zu reagieren und Resilienz autzubauen. Ziel ist nicht, dass du dich „anpasst", •, sondern dass diskriminierende Muster sichtbar und benennbar werden und du deine Optionen reflektieren kannst.
+
+## Wie funktionieren die Visual Novels?
+
+Du spielst realistische, von wahren Begebenheiten inspirierte Dialoge. Eine Visual Novel ist eine interaktive Erzählform aus Text und Bildern. Du triffst Dialogentscheidungen und bestimmst den Verlauf. Du schlüpfst in die Rolle einer Gründerin und erlebst ihre Herausforderungen.
+
+## Wie funktioniert das KI-Feedback?
+
+Nach jedem Dialog erhältst du ein Ki-basiertes Feedback. Die KI analysiert die Gespräche, weist auf Vorurteile hin (z. B. Zweifel an Müttern, Technik-Stereotype) und zeigt Strategien mit Vor- und Nachteilen auf. Eine Übersicht und Erklärung der verschiedenen Biases findest du in der Wissensbasis.
+
+## Wie kannst du deinen Fortschritt verfolgen?
+
+Im Archiv findest du gespielte Dialoge und Analysen. Du kannst dir Novels merken, sie erneut spielen und sehen, welche Entscheidungen du schon ausprobiert hast.
+
+## Wer hat KITE entwickelt?
+
+KITE wurde an der Hochschule Heilbronn im Lab für Sozioinformatik von einem Team unter Leitung von Prof. Dr. Nicola Marsden entwickelt. Die bundesweite gründerinnenagentur (bga) ist zentrale Partnerin für die App. Gefördert wurde die Entwicklung durch das Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend (BMBFSFJ) im Rahmen der Förderrichtlinie „Künstliche Intelligenz für das Gemeinwohl".
+
+## Wie kann ich starten?
+
+Gehe zur Novel-Auswahl. Wähle eine Visual Novel und tauche in die Geschichte ein. Erlebe hautnah, was es bedeutet, gegen Diskriminierung anzutreten.
+
+## Wie kann ich mehr erfahren?
+
+Wenn du zunächst noch mehr über KITE erfahren möchtest, spiele die Einstiegs-Novel.
+

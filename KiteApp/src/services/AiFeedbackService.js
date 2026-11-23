@@ -186,150 +186,44 @@ export function getFeedbackForNovel(novelId) {
 	return safeJsonParse(storage.getItem(`${STORAGE_KEYS.BY_NOVEL_PREFIX}${id}`));
 }
 
+// A Gemini API key must never be read by the browser. The backend owns it.
 export async function loadApiKey() {
-	// 1. Try to check if the Node.js backend is active and configured
-	try {
-		const response = await fetch("/api/config-status");
-		if (response.ok) {
-			const data = await response.json();
-			if (data && data.configured) {
-				return "server_managed";
-			}
-		}
-	} catch (e) {
-		console.log("Backend server not active. Falling back to local file load...");
-	}
-
-	// 2. Fallback to reading the local .env files directly (for static hosting/Gitlab pages)
-	const filesToTry = ["../../.env", "../../env", "../../env.txt"];
-	for (const file of filesToTry) {
-		try {
-			const response = await fetch(new URL(file, import.meta.url));
-			if (response.ok) {
-				const text = await response.text();
-				const match = text.match(/GEMINI_API_KEY\s*=\s*(.*)/);
-				if (match) {
-					return match[1].trim().replace(/['"]/g, "");
-				}
-			}
-		} catch (e) {
-			// ignore and try next
-		}
-	}
-	return null;
+    try {
+        const response = await fetch("/api/config-status", { cache: "no-store" });
+        if (!response.ok) return null;
+        const data = await response.json();
+        return data?.configured === true ? "server_managed" : null;
+    } catch (error) {
+        console.warn("KITE: AI backend is not available.");
+        return null;
+    }
 }
-
 
 export async function generateAiFeedback(novel, history, apiKey) {
-	// If the API key is "server_managed", query the backend proxy
-	if (apiKey === "server_managed") {
-		const response = await fetch("/api/generate-feedback", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ novel, history }),
-		});
+    if (apiKey !== "server_managed") {
+        throw new Error("KI-Feedback benötigt den konfigurierten KITE-Server.");
+    }
 
-		if (!response.ok) {
-			let errMsg = `Server returned status ${response.status}`;
-			try {
-				const errData = await response.json();
-				if (errData && errData.error) {
-					errMsg = errData.error;
-				}
-			} catch (e) {
-				// ignore
-			}
-			throw new Error(errMsg);
-		}
+    const response = await fetch("/api/generate-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ novel, history }),
+    });
 
-		const data = await response.json();
-		if (!data || !data.text) {
-			throw new Error("Ungültige Antwortstruktur vom Server");
-		}
+    if (!response.ok) {
+        let message = `KI-Server: HTTP ${response.status}`;
+        try {
+            const errorData = await response.json();
+            if (typeof errorData?.error === "string") {
+                message = errorData.error;
+            }
+        } catch (_) { /* Keep the generic status error. */ }
+        throw new Error(message);
+    }
 
-		return data.text.trim();
-	}
-
-	// Otherwise, perform the direct Google Gemini API call securely in the browser using the provided apiKey (fallback for static hostings)
-	const conversationTranscript = history
-		.map((msg) => `${msg.speaker || (msg.isPlayer ? "Du" : "Npc")}: ${msg.text}`)
-		.join("\n");
-
-	const prompt = `Du bist ein Experte für Diversität, Antidiskriminierung und Entrepreneurship im Projekt KITE (KI-Thinktank Entrepreneurship).
-Deine Aufgabe ist es, das Gespräch einer Gründerin ("Du") mit ihrem Gesprächspartner (z. B. Kundin, Investor, Bankberater, Vermieter) in einer Visual Novel zu analysieren. Das Gespräch kann verschiedene Arten von Biases, Vorurteilen oder Diskriminierung enthalten (z. B. geschlechtsspezifische Vorurteile, rassistische Kommentare, Gender Pay Gap, Stereotype über Flexibilität).
-
-Kontext der Visual Novel:
-- Titel: ${novel?.title || "KITE Visual Novel"}
-- Beschreibung: ${novel?.description || ""}
-
-Gesprächsverlauf:
-${conversationTranscript}
-
-Bitte erstelle eine strukturierte Analyse in deutscher Sprache. Halte dich exakt an folgendes Format:
-
-Beginne mit dem Satz:
-"Ich habe den Dialog analysiert und einige Biases identifiziert, die im Gespräch zum Tragen kommen. Hier sind meine Beobachtungen und Empfehlungen:"
-
-Danach folgen:
-1. Eine nummerierte Liste (z. B. 1., 2., 3.) der identifizierten Biases oder Dynamiken (z. B. "Geschlechterlohngefälle (Gender Pay Gap)", "Erwartungen bezüglich Frauen in Verhandlungen", "Rassistische Vorurteile", "Stereotypen über Flexibilität"). Beschreibe jeweils kurz, wie sich der Bias im Gespräch geäußert hat und wie die Gründerin darauf reagiert hat.
-2. Ein Abschnitt mit der Überschrift "Vorteile deines Verhaltens:" gefolgt von einer stichpunktartigen Liste (mit "-"), die beschreibt, was an der Reaktion der Gründerin positiv war (z. B. Professionalität gewahrt, Grenzen gesetzt, Wert der Arbeit kommuniziert).
-3. Ein Abschnitt mit der Überschrift "Empfehlungen für die Zukunft:" gefolgt von einer stichpunktartigen Liste (mit "-"), die konkrete Tipps und Handlungsstrategien anbietet.
-
-WICHTIG: Verwende keine Markdown-Überschriften (wie # oder ##) or fettgedruckte HTML-Tags, sondern reinen Text mit Absätzen.`;
-
-	const makeRequest = async (modelName) => {
-		const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-		return await fetch(url, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				contents: [
-					{
-						parts: [
-							{
-								text: prompt,
-							},
-						],
-					},
-				],
-			}),
-		});
-	};
-
-	let response = await makeRequest("gemini-3.5-flash");
-
-	// Fallback to gemini-2.5-flash if gemini-3.5-flash fails
-	if (!response.ok) {
-		console.warn(`Gemini API returned status ${response.status} for gemini-3.5-flash. Falling back to gemini-2.5-flash...`);
-		response = await makeRequest("gemini-2.5-flash");
-	}
-
-	// Fallback to gemini-3.1-flash-lite if gemini-2.5-flash fails
-	if (!response.ok) {
-		console.warn(`Gemini API returned status ${response.status} for gemini-2.5-flash. Falling back to gemini-3.1-flash-lite...`);
-		response = await makeRequest("gemini-3.1-flash-lite");
-	}
-
-	// Fallback to gemini-2.0-flash if gemini-3.1-flash-lite fails
-	if (!response.ok) {
-		console.warn(`Gemini API returned status ${response.status} for gemini-3.1-flash-lite. Falling back to gemini-2.0-flash...`);
-		response = await makeRequest("gemini-2.0-flash");
-	}
-
-	if (!response.ok) {
-		throw new Error(`Gemini API returned status ${response.status}`);
-	}
-
-	const data = await response.json();
-	const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-	if (!text) {
-		throw new Error("Ungültige Antwortstruktur der Gemini API");
-	}
-
-	return text.trim();
+    const data = await response.json();
+    if (typeof data?.text !== "string" || !data.text.trim()) {
+        throw new Error("Ungültige Antwortstruktur vom Server");
+    }
+    return data.text.trim();
 }
-

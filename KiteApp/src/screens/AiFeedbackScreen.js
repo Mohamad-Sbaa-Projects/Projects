@@ -348,7 +348,7 @@ class AiFeedbackScreen extends HTMLElement {
 						<line x1="12" y1="8" x2="12.01" y2="8"></line>
 					</svg>
 					<span class="ai-feedback__notice-text">
-						Hinweis: Trage einen Gemini-API-Key in der <code>.env</code>-Datei ein, um eine echte KI-Analyse deines Gesprächsverlaufs zu erhalten.
+						Hinweis: Die Live-KI-Analyse ist nur verfügbar, wenn das KITE-Backend mit einem Gemini-API-Key konfiguriert ist. Die Visual Novel bleibt auch ohne KI-Backend nutzbar.
 					</span>
 				`;
 				content.appendChild(noticeBanner);

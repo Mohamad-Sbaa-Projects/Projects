@@ -1,0 +1,22 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env
+env
+env.txt
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local dependencies and build artifacts
+node_modules/
+dist/
+coverage/
+*.log
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
