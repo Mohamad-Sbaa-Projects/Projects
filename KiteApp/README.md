@@ -113,7 +113,8 @@ Add screenshots from the running application, for example:
 
 3. Story screen showing character and dialogue
 
-![alt text](image-3.png)
+<img width="1273" height="1296" alt="image" src="https://github.com/user-attachments/assets/76baa6cd-101e-48a4-8bb6-1b3b562a61a6" />
+
 
 
 
