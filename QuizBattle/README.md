@@ -104,5 +104,16 @@ Die Fragen und Kategorien werden in `components/src/main/java/de/hhn/it/devtools
 ## Hinweise
 
 - Die Anwendung ist ein **lokales Zwei-Team-Spiel**, kein Online-Mehrspielerspiel.
-- Vor einer Veröffentlichung auf GitHub gegebenenfalls eigene Screenshots ergänzen und die Fragen auf Aktualität prüfen.
-- Dieses Projekt enthält keine Git-Historie des ursprünglichen Repositorys. Für die Veröffentlichung kann ein neues Repository angelegt werden.
+
+
+## SCreenshots 
+
+- Home screen
+
+![alt text](image.png)
+
+
+
+- Gameplay screen
+
+![alt text](image-1.png)

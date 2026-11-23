@@ -1,159 +1,122 @@
-# KITE – Interactive Visual Novel for Entrepreneurship
+# KITE – Interactive Visual Novel Web App
 
-**KITE** is an interactive, educational visual novel that helps users recognize and reflect on bias and discrimination in entrepreneurial situations. Players take the role of a woman founder and make decisions in realistic conversations, for example with banks, investors, landlords, or other stakeholders.
+## About the Project
 
-This repository contains a **lightweight web implementation of a project originally developed with Unity**, created as part of a university team project. The browser application uses HTML, CSS, and vanilla JavaScript with native Web Components rather than a frontend framework.
+**KITE** is an educational, interactive visual novel about prejudice and discrimination in entrepreneurship. Players experience everyday situations from the perspective of a woman starting a business, follow conversations with different characters, and make decisions that influence how the story continues.
 
-> **Project context:** KITE originates from a project at Hochschule Heilbronn. This repository represents work on its web implementation by a student development team. Original project content, artwork, and other assets may have separate rights or attribution requirements.
+The application was originally developed in **Unity**. In a university team project, we created a **lightweight browser-based version** using HTML, CSS, and vanilla JavaScript, without a frontend framework.
+
+> **Project context:** KITE was developed as part of a team project at Hochschule Heilbronn. The story content, images, and other assets may have separate usage rights.
 
 ## Features
 
-- **Interactive visual novels:** Follow dialogues, select responses, and explore different conversation paths.
-- **Novel player:** Displays backgrounds, characters, speaker-specific dialogue, and choice buttons.
-- **Animations:** Character reactions, blinking, visual effects, and scene/UI transitions.
-- **Progress and archive:** Save and resume novels, bookmark stories, and review previously played dialogues.
-- **Learning resources:** Knowledge screens and information about bias, along with additional information about KITE.
-- **AI-powered feedback:** Google Gemini can analyze a completed dialogue and provide feedback about possible biases and response strategies.
-- **Additional screens:** Settings, terms of use, privacy policy, legal notice, and application reset with confirmation.
-- **Mobile-oriented layout:** UI designed around a 450 × 932 reference viewport and scaled to the available space.
+- Interactive stories with dialogues and different response options
+- Story navigation with branching choices
+- Backgrounds, character views, and dialogue boxes
+- Character and interface animations
+- Novel selection, home screen, and navigation menu
+- Save, continue, and reset functionality for story progress
+- Additional information, settings, and legal-information screens
+- Mobile-oriented layout
 
-## Technology Stack
+## Technologies
 
-| Area | Technologies |
-| --- | --- |
-| Frontend | HTML5, CSS3, JavaScript (ES modules) |
-| UI architecture | Native Web Components (`HTMLElement`, Custom Elements) |
-| Navigation | Client-side hash routing |
-| Persistence | Browser `localStorage` |
-| Backend | Node.js built-in HTTP server |
-| AI integration | Google Gemini API via a Node.js proxy |
-| Version control | Git / GitLab |
+- **HTML5** and **CSS3**
+- **JavaScript (ES modules)**
+- **Web Components** (Custom Elements)
+- **Hash-based routing** for screen navigation
+- **Browser localStorage** for progress persistence
+- **Git / GitLab** for version control and collaboration
 
 ## My Contributions
 
-This was a **team project**. My contributions below are based on the tasks and issues assigned to and completed by me; they do not represent sole authorship of the entire application.
+This application was developed collaboratively with other students. The following describes my own work based on the project's assigned issues.
 
-### User Interface and Components
-- Implemented the home/start screen and application header, including navigation buttons and the burger menu.
-- Built and refined visual novel UI elements, including the dialogue box and its scrolling and sizing behavior.
-- Created the main novel player screen and integrated backgrounds, characters, dialogue, and choices.
-- Implemented legal information screens and their subpages, as well as the **More to KITE** screen.
+### Screens and Web Components
 
-### Routing and Story Interaction
-- Implemented and refined navigation between screens using JavaScript routing.
-- Worked on dialogue progression, scenario navigation, and choice-dependent interactions.
+- Implemented the **home screen**, application **header**, and navigation menu.
+- Worked on a reusable **dialogue box Web Component**, including speaker-specific text styling, sizing, and scrolling.
+- Developed the **legal-information screens**, their subpages, and the **More to KITE** screen.
+- Contributed to the **novel player** and helped integrate backgrounds, characters, dialogues, and choice buttons with the rest of the team.
 
-### State and Progress
-- Created functionality for saving, loading, continuing, and resetting novel progress.
-- Implemented the app-reset flow inside the privacy/legal area, including a confirmation step.
+### Routing and Story Navigation
 
-### Animations and UI Refinement
-- Worked on character, dialogue, and choice-button animations.
-- Improved scene presentation, character positioning, transitions, and mobile interaction behavior.
+- Worked on **JavaScript-based screen routing** and clear navigation paths.
+- Implemented or adapted dialogue progression, scenario navigation, and interactions with different choices.
 
-### Documentation
-- Collaborated with the other team members on the architecture documentation.
+### Progress Management
+
+- Worked on saving and loading novel progress and restoring the current story position.
+- Added **continue** and **reset** interactions, including a confirmation dialog before resetting application progress.
+
+### UI Adjustments and Animations
+
+- Worked on dialogue scrolling, character positioning, screen layout, and animation-related adjustments.
+- Made iterative changes to bring the web experience closer to the original Unity application.
+
+### Team Documentation
+
+- Collaborated on the **software architecture documentation** with other team members.
 
 ## Project Structure
 
 ```text
 KiteApp/
-├── index.html                    # Application entry point
-├── app.js                        # Bootstraps the <kite-app> component
-├── style.css                     # Global styling and animations
-├── package.json                  # npm start command
-├── server.js                     # Local Node.js server and Gemini proxy
-├── public_assets/                # Images, audio, legal texts, and other assets
+├── index.html                 # Application entry point
+├── app.js                     # Web app initialization
+├── style.css                  # Global styles
+├── public_assets/             # Images, sounds, and other static assets
 └── src/
-    ├── components/              # Reusable Web Components
-    ├── controllers/             # Novel interaction and navigation controllers
-    ├── core/                    # Routing and shared utilities
-    ├── data/                    # Story content and novel metadata
-    ├── screens/                 # Screens and page-level components
-    └── services/                # Storage, story, animation, AI, and other services
+    ├── components/            # Reusable Web Components
+    ├── controllers/           # Novel interaction and navigation
+    ├── core/                  # Routing and shared utilities
+    ├── data/                  # Story content and novel metadata
+    ├── screens/               # Application screens
+    └── services/              # Progress storage and other app services
 ```
 
-Examples from the implementation:
+## Run Locally
 
-- `src/core/screen_router.js` – switches screens using URL hashes.
-- `src/components/NovelPlayerView.js` – coordinates story scenes, characters, dialogue, and choices.
-- `src/components/DialogueBox.js` – renders conversation messages.
-- `src/services/StorageService.js` – saves progress and archive entries in `localStorage`.
-- `src/services/CharacterAnimationService.js` – handles character-related animation behavior.
-- `src/services/AiFeedbackService.js` – connects the UI to AI feedback generation.
+To preview the browser-based visual novel without installing a frontend framework:
 
-## Getting Started (Local Development)
-
-### Requirements
-- **Node.js 20.6+** (a recent Node.js LTS version is recommended)
-- A modern web browser
-- A Google Gemini API key **only if you want to use AI feedback**
-
-### Start the Application
-
-1. Clone or download the repository.
-2. Open a terminal in the project root.
-3. Copy `.env.example` to `.env`, then insert your key **only** in `.env`:
-
-   ```powershell
-   Copy-Item .env.example .env
-   ```
-
-   ```dotenv
-   GEMINI_API_KEY=your_api_key_here
-   ```
-
-   To try the visual novel without AI feedback, leave the value empty. **Never commit `.env` to Git.**
-
-4. Start the local server:
+1. Download or clone the repository.
+2. Open a terminal in the `KiteApp` folder.
+3. Start a static development server (requires Python 3):
 
    ```bash
-   npm start
+   python -m http.server 8080
    ```
 
-5. Visit **http://localhost:8080**.
+4. Open **http://localhost:8080** in your browser.
 
-This version has no third-party npm packages listed in `package.json`; the server uses built-in Node.js modules.
-
-## Security and Deployment Notes
-
-- All Gemini API requests now go through the local Node.js backend. The browser no longer reads `.env`/`env.txt` or calls Gemini with a secret key.
-- Only frontend resources (`index.html`, `app.js`, `style.css`, `src/`, `public_assets/`) are served. Sensitive configuration and server files are blocked.
-- The feedback endpoint applies same-origin browser checks, request-size validation, simple per-IP rate limiting (10 requests per 10 minutes per Node.js process), and hides internal error details.
-- **Static hosting (GitLab Pages / GitHub Pages):** the visual novel works, but live Gemini feedback is **not available** without a separately hosted backend. The included GitLab Pages job publishes only frontend files.
-- **Public hosting with live AI:** simple per-IP limits are *not* a complete abuse-prevention strategy. Add appropriate authentication/access control, infrastructure-level rate limiting and cost quotas before an unrestricted public launch, especially behind reverse proxies or when running several instances.
-- If a real key has ever appeared in a Git commit or public deployment, **revoke and replace it**. Removing it from the latest commit is not sufficient.
-- The project has no third-party backend dependencies; `npm start` requires **Node.js 20.6+** for `--env-file` and a `.env` file, even if the key is empty.
-
-To create your local `.env` on Windows (PowerShell):
-
-```powershell
-Copy-Item .env.example .env
-# Fill GEMINI_API_KEY=... locally to enable live AI analysis.
-npm start
-```
-
-### Security smoke tests
-
-Run `npm start`, then verify:
-
-- `http://localhost:8080/` shows KITE.
-- `http://localhost:8080/.env`, `/env.txt`, `/server.js`, and `/.git/config` return **403 Forbidden**.
-- `http://localhost:8080/api/config-status` returns only `{"configured":true|false}`, **never the key**.
-- Visual novels and progress saving continue working without an API key; live AI feedback requires a working backend and a valid key.
-
-**Note:** this project has not been penetration-tested. API traffic incurs Gemini usage costs when a key is configured.
+Some features outside the core visual-novel experience may require additional services.
 
 ## Screenshots
 
-Add screenshots of the actual application before publishing the repository, for example:
+Add screenshots from the running application, for example:
 
-1. Novel selection screen
-2. Story and dialogue screen
-3. Choice interaction or archive screen
+1. Intro screen
 
-## Credits and Usage
+![alt text](image-1.png)
 
-Developed as a **university team project** based on the KITE application. KITE and its educational materials originate from the Hochschule Heilbronn project team. The app's own “More to KITE” and legal screens contain additional project and institutional information.
 
-**Before publishing:** Confirm that the team/project owners allow public release of the source code, story content, images, and audio. Do not add an open-source license for materials you are not authorized to license.
+
+
+2. Home screen
+
+![alt text](image-2.png)
+
+
+
+
+3. Story screen showing character and dialogue
+
+![alt text](image-3.png)
+
+
+
+
+## Credits and Publication
+
+KITE is a **university team project** based on the original Unity application. The web implementation was developed collaboratively by students.
+
