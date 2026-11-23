@@ -77,8 +77,6 @@ KiteApp/
 
 ## Run Locally
 
-To preview the browser-based visual novel without installing a frontend framework:
-
 1. Download or clone the repository.
 2. Open a terminal in the `KiteApp` folder.
 3. Start a static development server (requires Python 3):
